@@ -39,7 +39,7 @@ This implementation of Conway's Game of Life is written in C. It simulates an ev
 ## Prerequisites
 - **C Compiler**: Make sure you have `gcc` or another C compiler installed.
 - **Make**: Required to use the Makefile for compiling.
-- 
+
 ### Building the Project
 
 To build the project, simply use the following command in the terminal:
