@@ -6,8 +6,12 @@ Welcome to the **Conway's Game of Life** repository! This project implements the
 ## Table of Contents
 
 - [Description](#description)
+- [Features](#features)
 - [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Building the Project](#building-the-project)
 - [Usage](#usage)
+- [Cleaning Up](#cleaning-up)
 - [Rules of the Game](#rules-of-the-game)
 - [Examples](#examples)
 - [Contributing](#contributing)
@@ -17,6 +21,10 @@ Welcome to the **Conway's Game of Life** repository! This project implements the
 
 This implementation of Conway's Game of Life is written in C. It simulates an evolving grid of cells where each cell's next state depends on its neighboring cells. The project is designed to help users learn about cellular automata, C programming, and simple game simulations.
 
+## Features
+- Simulates Conway's Game of Life with an interactive console-based grid.
+- Provides a Makefile for easy compilation and cleanup.
+  
 ## Installation
 
 1. Clone the repository:
@@ -27,19 +35,31 @@ This implementation of Conway's Game of Life is written in C. It simulates an ev
    ```bash
    cd conways-game-of-life
    ```
-3. Compile the code:
-   ```bash
-   gcc -o game_of_life main.c
-   ```
 
+## Prerequisites
+- **C Compiler**: Make sure you have `gcc` or another C compiler installed.
+- **Make**: Required to use the Makefile for compiling.
+- 
+### Building the Project
+
+To build the project, simply use the following command in the terminal:
+```bash
+make
+```
 ## Usage
 
 Run the program with the following command:
 ```bash
-./game_of_life
+./conways_game_of_life
 ```
 
 You can modify the initial conditions and grid size within the `main.c` file to experiment with different patterns.
+
+## Cleaning Up
+To remove all compiled files and the executable, use:
+```bash
+make clean
+```
 
 ## Rules of the Game
 
