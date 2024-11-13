@@ -11,7 +11,7 @@
 
 #define WIDTH 32    ///< Width of the grid.
 #define HEIGHT 32   ///< Height of the grid.
-
+#define MAX_CELLS WIDTH*HEIGHT
 int grid[HEIGHT][WIDTH]; ///< 2D array representing the grid where each cell is either alive or dead.
 
 /**
@@ -111,6 +111,36 @@ void next_generation() {
 }
 
 /**
+ * @brief Takes user input to specify initial positions of alive cells.
+ *
+ * This function prompts the user to enter coordinates of cells they want to initialize as alive.
+ * The user can stop entering coordinates by inputting a negative number for x or y.
+ *
+ * @param alive_cells Array to store the coordinates of alive cells entered by the user.
+ * @param num_cells Pointer to an integer where the count of alive cells will be stored.
+ */
+void take_user_input_for_live_cells(int alive_cells[][2], int* num_cells){
+    *num_cells = 0;
+    int x, y;
+
+    printf("Enter the coordinates for alive cells (x y). Enter -1 -1 to finish:\n");
+    while (*num_cells < MAX_CELLS) {
+        printf("Cell %d: ",*num_cells +1);
+        scanf("%d %d", &x, &y);
+
+        if (x == -1 || y == -1) break;
+
+        if(x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH){
+            alive_cells[*num_cells][0] = x;
+            alive_cells[*num_cells][1] = y;
+            (*num_cells)++;
+        }else {
+            printf("Invalid coordinates. Please enter values between 0 and %d for x and 0 and %d for y.\n", HEIGHT - 1, WIDTH - 1);
+        }
+    }
+}
+
+/**
  * @brief Main function that initializes the grid and starts the simulation loop.
  *
  * This function defines the initial positions of alive cells, initializes the grid, 
@@ -119,17 +149,12 @@ void next_generation() {
  * @return int Always returns 0.
  */
 int main() {
-int alive_cells[][2] = {
-    {8, 16}, {9, 16}, {10, 16}, {11, 16}, {12, 16}, {13, 16}, {14, 16},
-    {18, 16}, {19, 16}, {20, 16}, {21, 16}, {22, 16}, {23, 16}, {24, 16},
-    {16, 8}, {16, 9}, {16, 10}, {16, 11}, {16, 12}, {16, 13}, {16, 14},
-    {16, 18}, {16, 19}, {16, 20}, {16, 21}, {16, 22}, {16, 23}, {16, 24},
-    {10, 10}, {10, 22}, {22, 10}, {22, 22}, {12, 12}, {12, 20},
-    {20, 12}, {20, 20}, {14, 14}, {14, 18}, {18, 14}, {18, 18}
-};
 
-    int num_cells = sizeof(alive_cells) / sizeof(alive_cells[0]);
+    int alive_cells[MAX_CELLS][2];
+    int num_cells;
     
+    take_user_input_for_live_cells(alive_cells, &num_cells);
+
     initialize_grid(alive_cells, num_cells);
     while (1) {
         display_grid();
