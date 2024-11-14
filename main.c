@@ -199,7 +199,7 @@ int main() {
     while (1) {
         display_grid();
         next_generation();
-        sleep_ms(100);
+        sleep_ms(500);
     }
     return 0;
 }
