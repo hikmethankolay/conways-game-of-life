@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -111,17 +112,56 @@ void next_generation() {
 }
 
 /**
- * @brief Takes user input to specify initial positions of alive cells.
+ * @brief Initializes the positions of alive cells based on user input or a predefined pattern.
  *
- * This function prompts the user to enter coordinates of cells they want to initialize as alive.
- * The user can stop entering coordinates by inputting a negative number for x or y.
+ * This function provides the user with an option to either input the coordinates of alive cells
+ * manually or select a predefined pattern (Pulsar) to initialize the grid.
+ * 
+ * - If the user selects the predefined pattern, the function copies the pattern's coordinates
+ *   to the `alive_cells` array and sets the `num_cells` count accordingly.
+ * - If the user chooses to enter coordinates manually, they can input x and y positions for each cell,
+ *   and the process stops when they enter a negative value for either x or y.
  *
- * @param alive_cells Array to store the coordinates of alive cells entered by the user.
- * @param num_cells Pointer to an integer where the count of alive cells will be stored.
+ * @param[out] alive_cells Array to store the coordinates of alive cells initialized by the user or selected pattern.
+ * @param[out] num_cells Pointer to an integer where the total count of alive cells will be stored.
  */
 void take_user_input_for_live_cells(int alive_cells[][2], int* num_cells){
     *num_cells = 0;
     int x, y;
+    int choice;
+
+    while (1) {
+        printf("\e[1;1H\e[2J"); // Clear the terminal screen
+        printf("Do you want to enter cordinate of alive cells yourself or use predefined start postions?\n");
+        printf("1-)Pulsar\n");
+        printf("2-)Enter cordinates yourself.\n");
+        printf("Please make a choice: ");
+        scanf_s("%d",&choice);
+
+        switch (choice) {
+            case 1:
+                int pulsar_cells[][2] = {
+                    {10, 12}, {10, 13}, {10, 14}, {10, 18}, {10, 19}, {10, 20},
+                    {12, 10}, {12, 15}, {12, 17}, {12, 22},
+                    {13, 10}, {13, 15}, {13, 17}, {13, 22},
+                    {14, 10}, {14, 15}, {14, 17}, {14, 22},
+                    {15, 12}, {15, 13}, {15, 14}, {15, 18}, {15, 19}, {15, 20},
+                    {17, 12}, {17, 13}, {17, 14}, {17, 18}, {17, 19}, {17, 20},
+                    {18, 10}, {18, 15}, {18, 17}, {18, 22},
+                    {19, 10}, {19, 15}, {19, 17}, {19, 22},
+                    {20, 10}, {20, 15}, {20, 17}, {20, 22},
+                    {22, 12}, {22, 13}, {22, 14}, {22, 18}, {22, 19}, {22, 20}
+                };
+                (*num_cells) = sizeof(pulsar_cells) / sizeof(pulsar_cells[0]);
+                memcpy(alive_cells, pulsar_cells, sizeof(pulsar_cells));
+                return;
+            case 2:
+                break;
+            default:
+                continue;
+        }
+    }
+    
 
     printf("Enter the coordinates for alive cells (x y). Enter -1 -1 to finish:\n");
     while (*num_cells < MAX_CELLS) {
@@ -159,7 +199,7 @@ int main() {
     while (1) {
         display_grid();
         next_generation();
-        sleep_ms(150);
+        sleep_ms(100);
     }
     return 0;
 }
