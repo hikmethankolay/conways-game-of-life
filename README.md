@@ -53,7 +53,7 @@ Run the program with the following command:
 make run
 ```
 
-You can modify the initial conditions and grid size within the `main.c` file to experiment with different patterns.
+You can manually enter each cells coordinate or use a predefined pattern.
 
 ## Cleaning Up
 To remove all compiled files and the executable, use:
@@ -74,8 +74,6 @@ These simple rules create complex and beautiful patterns over time, illustrating
 - **Still Lifes**: Patterns that do not change from one generation to the next.
 - **Oscillators**: Patterns that repeat after a fixed number of generations.
 - **Spaceships**: Patterns that translate across the grid over time.
-
-Modify the initial pattern in the code to explore these configurations.
 
 ## Contributing
 
