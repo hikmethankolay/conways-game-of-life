@@ -50,7 +50,7 @@ make
 
 Run the program with the following command:
 ```bash
-./conways_game_of_life
+make run
 ```
 
 You can modify the initial conditions and grid size within the `main.c` file to experiment with different patterns.
