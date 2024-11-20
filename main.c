@@ -14,7 +14,7 @@
 #define HEIGHT 32   ///< Height of the grid.
 #define MAX_CELLS WIDTH*HEIGHT
 int grid[HEIGHT][WIDTH]; ///< 2D array representing the grid where each cell is either alive or dead.
-
+int temp_grid[HEIGHT][WIDTH]; ///< 2D array representing the grid where each cell is either alive or dead. It's used for calculating next generation.
 /**
  * @brief Initializes the grid with specified alive cells.
  *
@@ -48,7 +48,7 @@ void display_grid() {
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            printf(grid[i][j] ? "#  " : "-- ");
+            printf(grid[i][j] ? "# " : ". ");
         }
         printf("\n");
     }
@@ -89,7 +89,6 @@ int count_neighbors(int x, int y) {
  * The new state is stored temporarily, then copied back to the main grid.
  */
 void next_generation() {
-    int temp_grid[HEIGHT][WIDTH];
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
