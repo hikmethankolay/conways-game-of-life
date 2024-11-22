@@ -155,28 +155,27 @@ void take_user_input_for_live_cells(int alive_cells[][2], int* num_cells){
                 memcpy(alive_cells, pulsar_cells, sizeof(pulsar_cells));
                 return;
             case 2:
-                break;
+                printf("Enter the coordinates for alive cells (x y). Enter -1 -1 to finish:\n");
+                while (*num_cells < MAX_CELLS) {
+                    printf("Cell %d: ",*num_cells +1);
+                    scanf("%d %d", &x, &y);
+
+                    if (x == -1 || y == -1) break;
+
+                    if(x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH){
+                        alive_cells[*num_cells][0] = x;
+                        alive_cells[*num_cells][1] = y;
+                        (*num_cells)++;
+                    }else {
+                        printf("Invalid coordinates. Please enter values between 0 and %d for x and 0 and %d for y.\n", HEIGHT - 1, WIDTH - 1);
+                    }
+                }
+                return;
             default:
                 continue;
         }
     }
     
-
-    printf("Enter the coordinates for alive cells (x y). Enter -1 -1 to finish:\n");
-    while (*num_cells < MAX_CELLS) {
-        printf("Cell %d: ",*num_cells +1);
-        scanf("%d %d", &x, &y);
-
-        if (x == -1 || y == -1) break;
-
-        if(x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH){
-            alive_cells[*num_cells][0] = x;
-            alive_cells[*num_cells][1] = y;
-            (*num_cells)++;
-        }else {
-            printf("Invalid coordinates. Please enter values between 0 and %d for x and 0 and %d for y.\n", HEIGHT - 1, WIDTH - 1);
-        }
-    }
 }
 
 /**
